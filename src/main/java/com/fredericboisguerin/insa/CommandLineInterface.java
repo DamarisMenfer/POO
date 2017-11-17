@@ -8,13 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Main {
-
-    private static final String COMMA_DELIMITER = ",";
-    private static final String NEW_LINE_SEPARATOR = "\n";
+public class CommandLineInterface {
 
 
-    public static void main(String[] args) {
+    public void main() {
         ContactsManager contManager = new ContactsManager();
 
         String fileName = "/home/mendesfe/contacts-manager/Contacts.csv";
@@ -36,7 +33,7 @@ public class Main {
             switch (option) {
                 case 1:
                     System.out.print("Créer un contact\n");
-                    creerContact(contManager, fileName);
+                    creerContact(contManager);
                     break;
                 case 2:
                     System.out.print("Modifier un contact\n");
@@ -129,58 +126,20 @@ public class Main {
         }
     }
 
-    private static void creerContact(ContactsManager contManager, String fileName) {
-        Scanner sc1 = new Scanner(System.in);
+    public void creerContact(ContactsManager contManager) {
+        Scanner scanner = new Scanner(System.in);
 
         System.out.print("Nom du contact:\n");
-        while (!sc1.hasNext()) {
-            System.out.print("Inserer un nom!\n");
-            sc1.next();
-        }
-        String nom = sc1.next();
+        String nom = scanner.nextLine();
 
         System.out.print("email du contact:\n");
-        while (!sc1.hasNext()) {
-            System.out.print("Inserer un email!\n");
-            sc1.next();
-        }
-        String email = sc1.next();
+        String email = scanner.nextLine();
 
         System.out.print("Phone du contact:\n");
-        while (!sc1.hasNext()) {
-            System.out.print("Inserer un phone!\n");
-            sc1.next();
-        }
-        String phone = sc1.next();
+        String phone = scanner.nextLine();
 
         try {
             contManager.addContact(nom,email,phone);
-            FileWriter fileWriter = null;
-
-            try {
-                fileWriter = new FileWriter(fileName);
-
-                fileWriter.append(nom);
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(email);
-                fileWriter.append(COMMA_DELIMITER);
-                fileWriter.append(phone);
-                fileWriter.append(NEW_LINE_SEPARATOR);
-
-            } catch (Exception e) {
-                System.out.println("Error in CsvFileWriter !!!");
-                e.printStackTrace();
-            } finally {
-
-                try {
-                    fileWriter.flush();
-                    fileWriter.close();
-                } catch (IOException e) {
-                    System.out.println("Error while flushing/closing fileWriter !!!");
-                    e.printStackTrace();
-                }
-
-            }
 
         } catch (InvalidContactNameException e) {
             e.printStackTrace();
