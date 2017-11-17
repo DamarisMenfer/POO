@@ -38,7 +38,12 @@ public class Contact {
 
     public void printContact(){
 
-        System.out.printf("%s, %s, %s", this.name, this.mail, this.phone);
+        if(this.mail != null) {
+            System.out.printf("%s, %s, %s", this.name, this.mail, this.phone);
+        }
+        else{
+            System.out.printf("%s, %s", this.name, this.phone);
+        }
     }
 }
 

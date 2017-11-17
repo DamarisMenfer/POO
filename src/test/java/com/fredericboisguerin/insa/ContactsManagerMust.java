@@ -31,11 +31,13 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_one_contact_without_email_nor_phone_number() {
+    public void list_one_contact_without_email_nor_phone_number() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
         String noPhoneNumber = null;
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, noPhoneNumber);
+
 
         contactsManager.printAllContacts();
 
@@ -43,9 +45,10 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_one_contact_without_email() {
+    public void list_one_contact_without_email() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
         String noEmail = null;
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, noEmail, NICOLE_FERRONI_PHONE_NUMBER);
 
         contactsManager.printAllContacts();
@@ -55,10 +58,12 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_one_contact_without_phone_number() {
+    public void list_one_contact_without_phone_number() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
         String noPhoneNumber = null;
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, noPhoneNumber);
+
 
         contactsManager.printAllContacts();
 
@@ -67,9 +72,11 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_one_added_contact() {
+    public void list_one_added_contact() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
+
 
         contactsManager.printAllContacts();
 
@@ -78,10 +85,14 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void list_two_added_contacts() {
+    public void list_two_added_contacts() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
+
+
         contactsManager.addContact(GUILLAUME_MEURICE_NAME, GUILLAUME_MEURICE_EMAIL, GUILLAUME_MEURICE_PHONE_NUMBER);
+
 
         contactsManager.printAllContacts();
 
@@ -93,14 +104,19 @@ public class ContactsManagerMust {
     }
 
     @Test
-    public void retrieve_a_contact_from_its_name() {
+    public void retrieve_a_contact_from_its_name() throws InvalidEmailException, InvalidContactNameException {
         ContactsManager contactsManager = new ContactsManager();
+
         contactsManager.addContact(NICOLE_FERRONI_NAME, NICOLE_FERRONI_EMAIL, NICOLE_FERRONI_PHONE_NUMBER);
+
+
         contactsManager.addContact(GUILLAUME_MEURICE_NAME, GUILLAUME_MEURICE_EMAIL, GUILLAUME_MEURICE_PHONE_NUMBER);
+
 
         contactsManager.searchContactByName("meuri");
 
-        String expectedOutput = GUILLAUME_MEURICE_NAME + FIELD_SEPARATOR + GUILLAUME_MEURICE_EMAIL + FIELD_SEPARATOR + GUILLAUME_MEURICE_PHONE_NUMBER;
+        String expectedOutput = GUILLAUME_MEURICE_NAME + FIELD_SEPARATOR
+                + GUILLAUME_MEURICE_EMAIL + FIELD_SEPARATOR + GUILLAUME_MEURICE_PHONE_NUMBER;
         assertThat(standardOutput(), is(expectedOutput + System.lineSeparator()));
     }
 
